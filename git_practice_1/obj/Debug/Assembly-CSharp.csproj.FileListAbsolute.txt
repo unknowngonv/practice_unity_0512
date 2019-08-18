@@ -349,3 +349,10 @@
 /Users/amayamao/git_practice_1/git_practice_1/obj/Debug/Assembly-CSharp.csproj.CopyComplete
 /Users/amayamao/git_practice_1/git_practice_1/obj/Debug/Assembly-CSharp.dll
 /Users/amayamao/git_practice_1/git_practice_1/obj/Debug/Assembly-CSharp.pdb
+/Users/amayamao/git_practice_1/git_practice_1/Temp/bin/Debug/Boo.Lang.dll
+/Users/amayamao/git_practice_1/git_practice_1/Temp/bin/Debug/UnityEditor.UI.dll
+/Users/amayamao/git_practice_1/git_practice_1/Temp/bin/Debug/UniRx.pdb
+/Users/amayamao/git_practice_1/git_practice_1/Temp/bin/Debug/UniRx.Async.pdb
+/Users/amayamao/git_practice_1/git_practice_1/Temp/bin/Debug/UniRx.Async.Editor.pdb
+/Users/amayamao/git_practice_1/git_practice_1/Temp/bin/Debug/UnityEditor.UI.dll.mdb
+/Users/amayamao/git_practice_1/git_practice_1/Temp/bin/Debug/UnityEditor.UI.xml

@@ -3,14 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
+    /// -----------------------------------------
+    /// フィールド[SerializeField]
+    /// -----------------------------------------
 	[SerializeField]private Text scoreLabel;
-	[SerializeField]private GameObject winnerLabelObject;
+    [SerializeField]private Text playerScore;
+    [SerializeField]private GameObject winnerLabelObject;
+    [SerializeField]private GameObject itemObjects;
+    [SerializeField]private Transform itemRoot;
 
-	public static GameController instance;
-    private static int count = 0;
+    /// -----------------------------------------
+    /// フィールド
+    /// -----------------------------------------
+    public static GameController instance;
+
+    //オブジェクト数。
+    private int count = 0;
+    private int countNum;
+
+    //プレイヤースコア。
+    public int PlayerScore;
 
     public bool _ObjDestroyed = false;
     public bool ObjDestroyed
@@ -24,27 +40,69 @@ public class GameController : MonoBehaviour {
             }
     }
 
-	private void Awake()
+    /// -----------------------------------------
+    /// メソッド　- MonoBehaviour
+    /// -----------------------------------------
+    private void Awake()
 	{
 		instance = this;
-		count = GameObject.FindGameObjectsWithTag ("Item").Length;
+
+        countNum = 3;
+        SetItemObject(countNum);
+
+        //オブジェクト数を取得。
+        count = GameObject.FindGameObjectsWithTag ("Item").Length;
 
 		scoreLabel.text = count.ToString ();
 
-		ObjDestroyed = false;
-	}
+        //プレイヤースコアを初期化する。
+        PlayerScore = PlayerPrefs.GetInt("SCORE", 0);
+        playerScore.text = PlayerScore.ToString();
 
-    public void SetText()
+        ObjDestroyed = false;
+
+    }
+
+    /// -----------------------------------------
+    /// メソッド　
+    /// -----------------------------------------
+
+    /// <summary>
+    /// Itemオブジェクトを配置する。
+    /// </summary>
+    private void SetItemObject(int num)
+    {
+        for(int i = 0; i < num; i++)
+        {
+            var item = Instantiate(itemObjects);
+            item.transform.SetParent(itemRoot, false);
+        }
+
+    }
+
+    /// <summary>
+    /// 左下カウントテキスト表示処理。
+    /// </summary>
+    private void SetText()
 	{
         if (_ObjDestroyed != false)
         {
             count--;
             scoreLabel.text = count.ToString ();
 
-			if (count == 0)
+            PlayerScore += 100;
+
+            //プレイヤースコアを保存。
+            PlayerPrefs.SetInt("SCORE", PlayerScore);
+            PlayerPrefs.Save();
+            playerScore.text += PlayerScore.ToString();
+
+
+            if (count == 0)
             {
 				//オブジェクトをアクティブにする
 				winnerLabelObject.SetActive (true);
+                SceneManager.LoadScene("CloseMenu");
 			}
 
 			ObjDestroyed = false;

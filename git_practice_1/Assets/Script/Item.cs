@@ -5,12 +5,41 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
 
-	private bool getObj;
+    /// -----------------------------------------
+    /// フィールド
+    /// -----------------------------------------
+    private bool getObj;
 
-	//トリガーとの接触時に呼ばれるコールバック。
-	public void OnTriggerEnter(Collider hit)
+    /// -----------------------------------------
+    /// メソッド　- MonoBehaviour
+    /// -----------------------------------------
+    private void Awake()
+    {
+        //x軸、z軸は-8~8の範囲。
+        var randomX = 5;
+        var randomY = 5;
+        var randomZ = 5;
+
+        SetActiveSelf(randomX, randomY, randomZ);
+    }
+
+    /// -----------------------------------------
+    /// メソッド
+    /// -----------------------------------------
+
+    /// <summary>
+    /// アイテムオブジェクトの座標管理。
+    /// </summary>
+    private void SetActiveSelf(int numX, int numY, int numZ)
+    {
+        this.transform.position = new Vector3(0,0,0);
+    }
+
+    /// <summary>
+    /// トリガーとの接触時に呼ばれるコールバック。
+    /// </summary>
+	private void OnTriggerEnter(Collider hit)
 	{
-
 		//接触対象はPlayerタグですか？
 		if (hit.CompareTag ("Player"))
 		{
